@@ -1,0 +1,363 @@
+#:import utils kivy.utils
+
+WindowManager:
+    PrimeraVentana:
+    SegundaVentana:
+    VentanaCalculadora:
+    VentanaPassword:
+    VentanaConversor:
+
+
+<PrimeraVentana>:
+    name: 'first'
+
+    Image:
+        source: 'nuevoFondo.png' 
+        allow_strech: True
+        fit_mode: 'fill'      
+        keep_ratio: True    
+         
+
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        padding: 50
+        spacing: 25    
+                
+                         
+        VideoButton: 
+            text: 'Video presentacíon'
+            font_size: 32
+            on_release: 
+                app.root.current = 'second'
+                root.manager.transition.direction = 'left'
+            
+            Image:
+                source: 'boton_passwordgen.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                allow_strech: True
+                fit_mode: 'fill'  
+                width: 710
+                height: 400   
+                keep_ratio: True
+
+        CalcButton:
+            text: 'Calculadora'
+            font_size: 32
+            on_release: 
+                app.root.current = 'calculadora'                    
+                root.manager.transition.direction = 'up'
+
+            Image:
+                source: 'boton_Calculadora.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                allow_strech: True
+                fit_mode: 'fill'  
+                width: 710
+                height: 400   
+                keep_ratio: True 
+
+        PasswordGenButton:
+            text: 'Password Generator'
+            font_size: 32
+            on_release: 
+                app.root.current = 'passwordgen'
+                root.manager.transition.direction = 'right' 
+            Image:
+                source: 'boton_passwordgen.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                allow_strech: True
+                fit_mode: 'fill'  
+                width: 710
+                height: 400   
+                keep_ratio: True    
+
+
+        ConversorButton:
+            text: 'Conversor'
+            font_size: 32
+            on_release:
+                app.root.current = 'conversor'
+                root.manager.transition.direction = 'down'
+            
+            Image:
+                source: 'boton_conversor.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                allow_strech: True
+                fit_mode: 'fill'  
+                width: 710
+                height: 400   
+                keep_ratio: True     
+        
+
+<ConversorButton@Button>            
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (0,0,0.5,1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [45]
+          
+    
+<PasswordGenButton@Button>
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (0,0,0.5,1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [45]
+
+<CalcButton@Button>:
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (0,0,0.5,1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [45]
+
+<VideoButton@Button>:
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (0,0,0.5,1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [45]
+  
+
+
+
+
+<SegundaVentana>:
+    name: 'second'
+
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+                            
+
+        Label:
+            text: 'Second Screen'
+            font_size: 32
+
+        Button: 
+            text: 'Go Back'
+            font_size: 32
+            on_release: 
+                app.root.current = 'first'
+                root.manager.transition.direction = 'right'
+                                    
+<VentanaCalculadora>:                                    
+    name: 'calculadora'
+                       
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        
+        Button:
+            text: 'Volver'
+            size_hint: (None,None)
+            height: 50
+            width: 450
+            on_release: 
+                app.root.current = 'first'
+                root.manager.transition.direction = 'down' 
+
+        TextInput: 
+            id: calc_input
+            multiline: False
+            text: '0'
+            halign: "right" 
+            font_size: 50
+            size_hint: (1, .15)
+            
+        GridLayout:
+            cols: 4
+            row: 5
+            
+            #Row1 
+
+            Button:            
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "%"
+                on_press: root.porcentaje()
+            
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "C"
+                on_press: root.clear()
+                
+            
+            Button:
+                id: clear
+                size_hint: (.2, .2)
+                font_size: 32
+                text: '<<'
+                on_release: root.borrar()
+            
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "/" 
+                on_release: root.math_sign("/")
+            
+            #Row 2
+            
+            Button:
+                id: siete
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "7"
+                background_color: (157/255, 157/255, 157/255, 1)
+                on_release: root.button_press(7)
+
+
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "8"    
+                background_color: (157/255, 157/255, 157/255, 1)
+                on_release: root.button_press(8)
+
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "9"
+                background_color: (157/255, 157/255, 157/255, 1)
+                on_release: root.button_press(9)
+
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "X" 
+                on_press: root.math_sign("*")
+
+            #Row 3
+
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "4"
+                background_color: (157/255, 157/255, 157/255, 1)
+                on_release: root.button_press(4)
+
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "5"    
+                background_color: (157/255, 157/255, 157/255, 1)
+                on_release: root.button_press(5)
+
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "6"
+                background_color: (157/255, 157/255, 157/255, 1)
+                on_release: root.button_press(6)
+            
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "-"            
+                on_press: root.math_sign("-")
+                
+            #Row 4
+
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "1"
+                background_color: (157/255, 157/255, 157/255, 1)
+                on_release: root.button_press(1)
+
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "2"    
+                background_color: (157/255, 157/255, 157/255, 1)
+                on_release: root.button_press(2)
+
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "3"
+                background_color: (157/255, 157/255, 157/255, 1)
+                on_release: root.button_press(3)
+
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "+" 
+                on_press: root.math_sign("+")
+
+
+            #Row 5 
+
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "+/-"
+                background_color: (157/255, 157/255, 157/255, 1)
+                on_press: root.pos_neg()
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "0"    
+                background_color: (157/255, 157/255, 157/255, 1)
+                on_release: root.button_press(0)
+
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "."
+                background_color: (157/255, 157/255, 157/255, 1)
+                on_press: root.punto()
+
+            Button:
+                size_hint: (.2, .2)
+                font_size: 32
+                text: "="    
+                on_press: root.igual() 
+                
+                  
+
+
+
+
+        
+
+
+<VentanaPassword>:
+    name: 'passwordgen'            
+
+    Button:
+        text: 'Volver al menu'
+        on_release:
+            app.root.current = 'first' 
+            root.manager.transition.direction = 'left'  
+
+<VentanaConversor>:
+    name: 'conversor'
+
+    Button:
+        text: 'Volver al menu'            
+        on_release: 
+            app.root.current = 'first'
+            root.manager.transition.direction = 'up'
