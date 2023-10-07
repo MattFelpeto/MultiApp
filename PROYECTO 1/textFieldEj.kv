@@ -1,0 +1,62 @@
+MDScreen:
+
+    Image:
+        source: 'fondoLog.png'
+        allow_strech: True
+        fit_mode: 'fill'      
+        keep_ratio: True
+
+        MDBoxLayout:
+            orientation: "vertical"
+            size: root.width, root.height
+            
+
+         
+            MDLabel:
+                id: upLabel
+                text: "Bienvenidx"      
+                font_style: 'H6'  
+                theme_text_color: "Custom"
+                text_color: 0,0,8,1       
+                font_size: 20
+                size_hint_x: None 
+                pos_hint: {"center_x": .5, "center_y": .8}
+                    
+
+            MDTextField:
+                id: user
+                hint_text: "Usuario"        
+                pos_hint: {"center_x": .5, "center_y": .7}
+                size_hint_x: None
+                width: 200
+                font_size: 18    
+
+            MDTextField:
+                id: password 
+                hint_text: "Password"
+                size_hint_x: None
+                width: 200
+                font_size: 18
+                pos_hint: {"center_x": .5, "center_y": .6}  
+            
+            MDRectangleFlatButton:
+                id: login
+                text: "Ingresar"
+                theme_text_color: "Custom"
+                text_color: "black"
+                line_color: "black"
+                size_hint_x: None
+                width: 250
+                font_size: 22
+                pos_hint: {"center_x": .5, "center_y": .2} 
+
+            MDRectangleFlatButton:
+                id: clear
+                text: "  Borrar  "
+                theme_text_color: "Custom"
+                text_color: "black"
+                line_color: "black"
+                size_hint_x: None
+                width: 250
+                font_size: 22
+                pos_hint: {"center_x": .5, "center_y": .1}        
